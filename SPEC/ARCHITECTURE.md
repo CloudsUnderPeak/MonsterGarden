@@ -26,6 +26,7 @@ MonsterGarden/
     │   ├── creature-renderer.js     # 單張圖片的變形與繪製
     │   └── world-renderer.js        # Canvas 尺寸、繪製順序與畫面合成
     └── ui/
+        ├── creature-drag.js         # 指標命中、拖曳擷取與放開／中止處理
         └── scene-selector.js        # 原生下拉選單與無障礙標籤
 ```
 

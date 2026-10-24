@@ -16,6 +16,7 @@
       this.footprints = [];
       this.destination = null;
       this.time = 0;
+      this.drag = null;
     }
 
     get scene() {
@@ -23,6 +24,7 @@
     }
 
     setResidents(assets) {
+      this.releaseDrag(null, false);
       // No placeholder creatures: every resident requires a decoded image.
       this.residents = assets.map((asset) => ({
         ...asset,
@@ -32,6 +34,7 @@
     }
 
     redistributeResidents() {
+      this.releaseDrag(null, false);
       this.footprints = [];
       this.destination = null;
       for (const resident of this.residents) {
@@ -44,12 +47,15 @@
         resident.wait = random(0, 4);
         resident.face = Math.random() < .5 ? -1 : 1;
         resident.step = 0;
+        resident.landing = null;
+        resident.settle = 0;
         this.chooseTarget(resident);
       }
     }
 
     setScene(id) {
       if (!Object.hasOwn(Garden.scenes, id)) return;
+      this.releaseDrag(null, false);
       this.sceneId = id;
       this.footprints = [];
       this.destination = null;
@@ -66,9 +72,57 @@
       resident.ty = random(.49, .89);
       if (this.sceneId === 'pond') {
         // Walk along the upper or left bank, rather than through water.
-        if (resident.x > .43) resident.ty = random(.49, .58);
+        if (resident.x > .43 && resident.y > .84) {
+          resident.tx = random(.08, .4);
+          resident.ty = random(.85, .89);
+        } else if (resident.x > .43) resident.ty = random(.49, .58);
         else resident.tx = random(.08, .4);
       }
+    }
+
+    beginDrag(resident, point, grip) {
+      if (this.drag || !this.residents.includes(resident)) return false;
+      resident.landing = null;
+      resident.settle = 0;
+      this.destination = null;
+      this.drag = {
+        resident,
+        x: point.x,
+        y: point.y,
+        gripX: grip.x,
+        gripY: grip.y,
+        age: 0,
+        sway: 0,
+      };
+      return true;
+    }
+
+    moveDrag(point) {
+      if (!this.drag) return;
+      const x = clamp(point.x, .02, .98);
+      this.drag.sway = clamp((x - this.drag.x) * 20, -.7, .7);
+      this.drag.x = x;
+      this.drag.y = clamp(point.y, .06, .96);
+    }
+
+    releaseDrag(position = null, animate = true) {
+      if (!this.drag) return;
+      const { resident } = this.drag;
+      const from = position || { x: this.drag.x, y: this.drag.y };
+      resident.x = clamp(from.x, .08, .92);
+      resident.y = clamp(from.y, .49, .89);
+      if (this.sceneId === 'pond' && inPond(resident.x, resident.y)) {
+        // Place the resident on the nearer upper or left bank.
+        if (resident.x - .43 < resident.y - .59) resident.x = .43;
+        else resident.y = .59;
+      }
+      resident.landing = animate
+        ? { fromX: from.x, fromY: from.y, elapsed: 0, duration: .28 }
+        : null;
+      resident.wait = random(.5, 1.2);
+      resident.step = 0;
+      this.drag = null;
+      this.chooseTarget(resident);
     }
 
     attract(x, y) {
@@ -76,6 +130,7 @@
       if (this.sceneId === 'pond' && inPond(x, y)) return;
       this.destination = { x, y, at: this.time };
       this.residents.forEach((resident) => {
+        if (this.drag?.resident === resident || resident.landing) return;
         resident.tx = clamp(x + random(-.06, .06), .08, .92);
         resident.ty = clamp(y + random(-.025, .025), .49, .89);
         if (this.sceneId === 'pond') {
@@ -102,6 +157,20 @@
 
     updateResident(resident, dt) {
       resident.phase += dt * 3;
+      if (this.drag?.resident === resident) {
+        this.drag.age += dt;
+        this.drag.sway *= Math.exp(-dt * 10);
+        return;
+      }
+      if (resident.landing) {
+        resident.landing.elapsed += dt;
+        if (resident.landing.elapsed >= resident.landing.duration) {
+          resident.landing = null;
+          resident.settle = .24;
+        }
+        return;
+      }
+      resident.settle = Math.max(0, resident.settle - dt);
       resident.step += dt;
       if (resident.wait > 0) {
         resident.wait -= dt;

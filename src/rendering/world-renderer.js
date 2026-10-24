@@ -29,9 +29,13 @@
       // Sort a copy so overlap follows ground depth without mutating simulation order.
       const residents = [...world.residents].sort((a, b) => a.y - b.y);
       for (const resident of residents) {
+        if (world.drag?.resident === resident) continue;
         Garden.drawCreature(context, resident, world, width, height, reducedMotion);
       }
       Garden.sceneRenderer.drawForeground(context, world, width, height);
+      if (world.drag) {
+        Garden.drawCreature(context, world.drag.resident, world, width, height, reducedMotion);
+      }
     }
 
     destroy() {

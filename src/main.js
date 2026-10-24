@@ -8,8 +8,10 @@
   const world = new Garden.Simulation();
   const renderer = new Garden.WorldRenderer(canvas);
   const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const dragControls = Garden.bindCreatureDrag(canvas, world, renderer,
+    () => motionPreference.matches);
   const unbindSelector = Garden.bindSceneSelector(
-    document.querySelector('#scene-select'), world, canvas,
+    document.querySelector('#scene-select'), world, canvas, dragControls.cancel,
   );
   let previousTime = null;
   let frameId = null;
@@ -26,6 +28,7 @@
   function onVisibilityChange() {
     previousTime = null;
     if (document.hidden) {
+      dragControls.cancel();
       cancelAnimationFrame(frameId);
       frameId = null;
     } else if (frameId === null) {
@@ -33,15 +36,8 @@
     }
   }
 
-  function attractResidents(event) {
-    const bounds = canvas.getBoundingClientRect();
-    world.attract(
-      (event.clientX - bounds.left) / bounds.width,
-      (event.clientY - bounds.top) / bounds.height,
-    );
-  }
-
   function redistributeResidents() {
+    dragControls.cancel();
     world.redistributeResidents();
   }
 
@@ -64,7 +60,6 @@
     }
   }
 
-  canvas.addEventListener('click', attractResidents);
   redistributeButton.addEventListener('click', redistributeResidents);
   document.addEventListener('visibilitychange', onVisibilityChange);
   window.addEventListener('pagehide', (event) => {
@@ -73,7 +68,7 @@
     cancelAnimationFrame(frameId);
     renderer.destroy();
     unbindSelector();
-    canvas.removeEventListener('click', attractResidents);
+    dragControls.destroy();
     redistributeButton.removeEventListener('click', redistributeResidents);
     document.removeEventListener('visibilitychange', onVisibilityChange);
   });
