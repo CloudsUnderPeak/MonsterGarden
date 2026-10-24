@@ -36,29 +36,63 @@
     return [left / scale, top / scale, (right - left + 1) / scale, (bottom - top + 1) / scale];
   }
 
-  function loadImage(path) {
-    return new Promise((resolve) => {
+  function decodeImage(url, signal) {
+    return new Promise((resolve, reject) => {
       const image = new Image();
-      // A stalled image must not prevent other residents from appearing.
-      const timeout = setTimeout(() => resolve(null), 15000);
+
+      function cleanup() {
+        image.onload = null;
+        image.onerror = null;
+        signal.removeEventListener('abort', abort);
+      }
+
+      function abort() {
+        cleanup();
+        image.src = '';
+        reject(new Error('Image loading timed out'));
+      }
+
       image.onload = () => {
-        clearTimeout(timeout);
-        try {
-          resolve({
-            image,
-            crop: findBounds(image),
-            name: path.split('/').pop().replace(/\.(png|avif)$/i, ''),
-          });
-        } catch {
-          resolve(null);
-        }
+        cleanup();
+        resolve(image);
       };
       image.onerror = () => {
-        clearTimeout(timeout);
-        resolve(null);
+        cleanup();
+        reject(new Error('Unable to decode image'));
       };
-      image.src = path.split('/').map(encodeURIComponent).join('/');
+      signal.addEventListener('abort', abort, { once: true });
+      if (signal.aborted) {
+        abort();
+        return;
+      }
+      image.src = url;
     });
+  }
+
+  async function loadImage(path) {
+    const controller = new AbortController();
+    // Covers both the conditional HTTP request and image decoding.
+    const timeout = setTimeout(() => controller.abort(), 15000);
+    let objectUrl;
+    try {
+      let url = path.split('/').map(encodeURIComponent).join('/');
+      if (Garden.resources.usesHttp) {
+        const response = await Garden.resources.revalidate(url, controller.signal);
+        objectUrl = URL.createObjectURL(await response.blob());
+        url = objectUrl;
+      }
+      const image = await decodeImage(url, controller.signal);
+      return {
+        image,
+        crop: findBounds(image),
+        name: path.split('/').pop().replace(/\.(png|avif)$/i, ''),
+      };
+    } catch {
+      return null;
+    } finally {
+      clearTimeout(timeout);
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
+    }
   }
 
   Garden.loadMonsterImages = async function (paths) {

@@ -47,6 +47,7 @@
 
   async function loadResidents() {
     try {
+      await Garden.resources.refreshScript('src/config/monsters.js');
       const { assets, failed } = await Garden.loadMonsterImages(Garden.monsterPaths);
       world.setResidents(assets);
       redistributeButton.disabled = assets.length === 0;

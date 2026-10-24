@@ -16,6 +16,7 @@ MonsterGarden/
     │   ├── monsters.js              # 怪物圖片清單
     │   └── scenes.js                # 場景參數
     ├── assets/
+    │   ├── resource-loader.js       # HTTP 快取重新驗證與清單腳本更新
     │   └── image-loader.js          # 圖片解碼、透明裁切及失敗處理
     ├── creatures/
     │   └── simulation.js            # 移動、待機、目標與雪地腳印

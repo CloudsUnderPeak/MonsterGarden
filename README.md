@@ -22,3 +22,4 @@
 
 - [架構與檔案分層](SPEC/ARCHITECTURE.md)
 - [怪物圖片規格與設定](SPEC/ASSETS.md)
+- [ETag 與資源重新驗證](SPEC/CACHING.md)
