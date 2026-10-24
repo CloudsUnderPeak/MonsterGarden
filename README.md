@@ -12,6 +12,10 @@
 
 支援 PNG / AVIF 圖片，透過伸縮、搖擺、轉向與彈跳，讓單張圖片活起來。網站只使用專案提供的怪物圖片，沒有示範角色。
 
+## 資料來源
+
+- [yurilin44 的 Twitch 頻道](https://www.twitch.tv/yurilin44)
+
 ## 技術文件
 
 - [架構與檔案分層](SPEC/ARCHITECTURE.md)
