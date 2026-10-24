@@ -2,6 +2,8 @@
 
 滿版的小怪物生態箱。使用專案內的 PNG / AVIF，透過伸縮、搖擺、翻轉和彈跳表現活動。畫面只保留右上角的場所選單，提供微風草原、月光池畔與靜靜雪原。點擊地面可吸引怪物靠近。
 
+線上網站：https://cloudsunderpeak.github.io/MonsterGarden/
+
 沒有內建示範怪物，也不會在圖片失敗時產生替代角色。
 
 ## 開啟與部署
@@ -9,6 +11,22 @@
 直接雙擊根目錄的 `index.html`，或將專案部署至 GitHub Pages 等靜態網站服務。不需後端、套件安裝或建置。
 
 GitHub Pages 使用分支部署，來源資料夾選擇 `/(root)`。請保留 `.nojekyll`，並一起部署 `assets/` 與 `src/`。所有資源使用相對路徑，支援專案子路徑。
+
+此儲存庫已啟用 Pages，發布來源為 `main` 的根目錄。設定位置：[Settings → Pages](https://github.com/CloudsUnderPeak/MonsterGarden/settings/pages)，Source 為 **Deploy from a branch**，Branch 為 **main / (root)**。之後推送到 `main` 就會自動更新網站。
+
+### 日後更新
+
+1. 修改程式或圖片；若新增、移除、改名圖片，同步更新 `src/config/monsters.js`。
+2. 雙擊 `index.html` 檢查本機畫面。
+3. 在專案資料夾執行：
+
+```bash
+git add .
+git commit -m "Update Monster Garden"
+git push origin main
+```
+
+4. 到儲存庫的 [Actions](https://github.com/CloudsUnderPeak/MonsterGarden/actions) 查看 Pages 部署進度；完成後開啟線上網站。若仍看到舊版，可用 Ctrl+F5 強制重新整理。
 
 ## 怪物圖片
 
