@@ -82,10 +82,12 @@
         url = objectUrl;
       }
       const image = await decodeImage(url, controller.signal);
+      const name = path.split('/').pop().replace(/\.(png|avif)$/i, '');
       return {
         image,
         crop: findBounds(image),
-        name: path.split('/').pop().replace(/\.(png|avif)$/i, ''),
+        name,
+        sourceFacing: Garden.leftFacingMonsters?.includes(name) ? -1 : 1,
       };
     } catch {
       return null;

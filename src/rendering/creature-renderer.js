@@ -17,7 +17,7 @@
     let x = resident.x * width;
     let y = resident.y * height;
     let angle = 0;
-    let scaleX = resident.face;
+    let scaleX = resident.face * (resident.sourceFacing ?? 1);
     let scaleY = 1;
     let pivotX = 0;
     let pivotY = 0;
