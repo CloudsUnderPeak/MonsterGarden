@@ -135,6 +135,41 @@ body[data-scene="pond"] .redistribute:not(:disabled):hover { background: #203c43
   text-align: center;
 }
 
+.credits {
+  position: absolute;
+  right: max(22px, env(safe-area-inset-right));
+  bottom: max(18px, env(safe-area-inset-bottom));
+  color: #46533f;
+  font-size: 11px;
+  line-height: 1.9;
+  text-align: left;
+  text-shadow: 0 1px 4px #f3f7e6;
+  pointer-events: none;
+}
+
+.credits p { margin: 0; }
+
+.credits a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  text-underline-offset: 3px;
+  pointer-events: auto;
+}
+
+.credits a:hover { text-decoration-thickness: 2px; }
+
+.credits a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+body[data-scene="pond"] .credits {
+  color: #e4ead8;
+  text-shadow: 0 1px 4px #203c43;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -145,6 +180,11 @@ body[data-scene="pond"] .redistribute:not(:disabled):hover { background: #203c43
 }
 
 @media (max-width: 600px) {
+  .credits {
+    right: max(14px, env(safe-area-inset-right));
+    bottom: max(14px, env(safe-area-inset-bottom));
+  }
+
   .scene-control {
     top: max(14px, env(safe-area-inset-top));
     right: max(14px, env(safe-area-inset-right));
