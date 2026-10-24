@@ -28,14 +28,16 @@ html, body {
 
 .scene-control {
   position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   top: max(22px, env(safe-area-inset-top));
   right: max(22px, env(safe-area-inset-right));
 }
 
-.scene-control select {
-  appearance: none;
+.scene-control select,
+.redistribute {
   min-height: 44px;
-  padding: 0 43px 0 19px;
   border: 1px solid #ffffff70;
   border-radius: 14px;
   background: #fbfff0c9;
@@ -48,7 +50,38 @@ html, body {
   cursor: pointer;
 }
 
-.scene-control svg {
+.scene-select { position: relative; }
+
+.scene-control select {
+  appearance: none;
+  padding: 0 43px 0 19px;
+}
+
+.redistribute {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  padding: 0;
+}
+
+.redistribute:disabled {
+  opacity: .45;
+  cursor: default;
+}
+
+.redistribute:not(:disabled):hover { background: #fbfff0; }
+
+.redistribute svg {
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.scene-select > svg {
   position: absolute;
   width: 16px;
   height: 16px;
@@ -60,7 +93,8 @@ html, body {
   pointer-events: none;
 }
 
-.scene-control select:focus-visible {
+.scene-control select:focus-visible,
+.redistribute:focus-visible {
   outline: 3px solid #859d5f;
   outline-offset: 4px;
 }
@@ -69,12 +103,15 @@ body[data-scene="pond"] .scene-control {
   color: #e4ead8;
 }
 
-body[data-scene="pond"] select {
+body[data-scene="pond"] select,
+body[data-scene="pond"] .redistribute {
   color-scheme: dark;
   background: #203c43c9;
   color: #e4ead8;
   border-color: #d8e8d630;
 }
+
+body[data-scene="pond"] .redistribute:not(:disabled):hover { background: #203c43; }
 
 .asset-status {
   position: absolute;

@@ -26,17 +26,26 @@
       // No placeholder creatures: every resident requires a decoded image.
       this.residents = assets.map((asset) => ({
         ...asset,
-        x: random(.15, .85),
-        y: random(.5, .88),
-        tx: random(.1, .9),
-        ty: random(.5, .88),
-        phase: random(0, Math.PI * 2),
         size: random(82, 108),
-        wait: random(0, 4),
-        face: 1,
-        step: 0,
       }));
-      this.setScene(this.sceneId);
+      this.redistributeResidents();
+    }
+
+    redistributeResidents() {
+      this.footprints = [];
+      this.destination = null;
+      for (const resident of this.residents) {
+        resident.x = random(.1, .9);
+        resident.y = random(.5, .88);
+        if (this.sceneId === 'pond' && inPond(resident.x, resident.y)) {
+          resident.y = random(.49, .58);
+        }
+        resident.phase = random(0, Math.PI * 2);
+        resident.wait = random(0, 4);
+        resident.face = Math.random() < .5 ? -1 : 1;
+        resident.step = 0;
+        this.chooseTarget(resident);
+      }
     }
 
     setScene(id) {

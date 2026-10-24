@@ -4,6 +4,7 @@
   // Composition root: coordinates modules; simulation and rendering own their state.
   const canvas = document.querySelector('#world');
   const status = document.querySelector('#asset-status');
+  const redistributeButton = document.querySelector('#redistribute');
   const world = new Garden.Simulation();
   const renderer = new Garden.WorldRenderer(canvas);
   const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -40,10 +41,15 @@
     );
   }
 
+  function redistributeResidents() {
+    world.redistributeResidents();
+  }
+
   async function loadResidents() {
     try {
       const { assets, failed } = await Garden.loadMonsterImages(Garden.monsterPaths);
       world.setResidents(assets);
+      redistributeButton.disabled = assets.length === 0;
       if (failed) {
         status.textContent = `${failed} 張怪物圖片無法載入，請檢查檔案路徑與瀏覽器的 AVIF 支援。`;
       } else if (!assets.length) {
@@ -58,6 +64,7 @@
   }
 
   canvas.addEventListener('click', attractResidents);
+  redistributeButton.addEventListener('click', redistributeResidents);
   document.addEventListener('visibilitychange', onVisibilityChange);
   window.addEventListener('pagehide', (event) => {
     // The back-forward cache retains the existing application and listeners.
@@ -66,6 +73,7 @@
     renderer.destroy();
     unbindSelector();
     canvas.removeEventListener('click', attractResidents);
+    redistributeButton.removeEventListener('click', redistributeResidents);
     document.removeEventListener('visibilitychange', onVisibilityChange);
   });
 

@@ -1,6 +1,6 @@
 # 怪物圖片規格與設定
 
-圖片放在 `assets/monsters/`；圖片清單集中於 `src/config/monsters.js`。目前已設定專案內的四張 AVIF。
+圖片放在 `assets/monsters/`；圖片清單集中於 `src/config/monsters.js`。圖片清單應與資料夾內的 PNG / AVIF 保持同步。
 
 新增、移除或重新命名圖片時，同步修改清單，例如：
 

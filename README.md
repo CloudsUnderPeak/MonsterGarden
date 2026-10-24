@@ -7,6 +7,7 @@
 ## 使用方式
 
 - 在右上角的下拉選單切換場所。
+- 點選單旁的重新整理按鈕，重新隨機分布怪物位置。
 - 點擊地面，吸引小怪物靠近。
 - 也可以直接雙擊專案的 `index.html`，在本機開啟。
 
@@ -14,7 +15,8 @@
 
 ## 資料來源
 
-- [yurilin44 的 Twitch 頻道](https://www.twitch.tv/yurilin44)
+- [林攸禮 Twitch 頻道](https://www.twitch.tv/yurilin44)
+- [小怪物圖鑑](https://yurilin44-shop.fourthwall.com/supporters)
 
 ## 技術文件
 
