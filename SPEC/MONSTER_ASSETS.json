@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "namingPattern": "monster-{number:03d}.{originalExtensionLowercase}",
+  "assets": [
+    {
+      "id": "monster-001",
+      "path": "assets/monsters/monster-001.avif",
+      "sha256": "a8af8a3a1e70c84857fd60b5b8df4f5b5c6ce3c4383ff6a680181a965e1c9e76",
+      "originalNames": [
+        "5bp4724mlbcelzdf635ib5hm3xuh.avif"
+      ]
+    },
+    {
+      "id": "monster-002",
+      "path": "assets/monsters/monster-002.avif",
+      "sha256": "282685ac801109f735fc677bec11684128f7ecc7e40de0430e447d11ae6bd67f",
+      "originalNames": [
+        "7ejsf1pslt9mujv4ljx7r6qryaw6.avif"
+      ]
+    },
+    {
+      "id": "monster-003",
+      "path": "assets/monsters/monster-003.avif",
+      "sha256": "63f73b6fe3e3cbe43364b07d73b7b4baa5608f97f414dee9fbc570bde936bdb6",
+      "originalNames": [
+        "7gcpm2ehje2s9v1n2banq11rtnfz.avif"
+      ]
+    },
+    {
+      "id": "monster-004",
+      "path": "assets/monsters/monster-004.avif",
+      "sha256": "bf70efdee7817f531ec0a90c1a85ac142d6b95bb822cdf5c1ff9f448e0cc8000",
+      "originalNames": [
+        "9vnqk1xfozn7rdww7pzyul9v5xz0.avif"
+      ]
+    },
+    {
+      "id": "monster-005",
+      "path": "assets/monsters/monster-005.avif",
+      "sha256": "178251ca142cf2a628c42dc49726827324a7b7e18688fa3770587830560608e8",
+      "originalNames": [
+        "jk4zliy17f1eej88rymq76oxudil.avif"
+      ]
+    },
+    {
+      "id": "monster-006",
+      "path": "assets/monsters/monster-006.avif",
+      "sha256": "073c4e548df08ddb3b53c2120400fdc47317ba6eccea9664f60340627072f09c",
+      "originalNames": [
+        "kkfhq3i99y20f75m367obmdo67bn.avif"
+      ]
+    },
+    {
+      "id": "monster-007",
+      "path": "assets/monsters/monster-007.avif",
+      "sha256": "9b7f70cd9cdbcfb1a3881479ad7b0a9bf5ac209b914acb9f84b84e15afabba06",
+      "originalNames": [
+        "luviga9xylmzqe2wogsfmlp2v27h.avif"
+      ]
+    },
+    {
+      "id": "monster-008",
+      "path": "assets/monsters/monster-008.avif",
+      "sha256": "380adc2f084597c9db569ac2301807bb18b10f2fdf4b1c4af2f2d74bee5034c0",
+      "originalNames": [
+        "ns3chv44noufc242tw7u1xmzign1.avif"
+      ]
+    },
+    {
+      "id": "monster-009",
+      "path": "assets/monsters/monster-009.avif",
+      "sha256": "a28c30f663a4946d0793c87e6be3dd8851284e1a9b39675d488a56f8d9803454",
+      "originalNames": [
+        "rws786b8fijnrpijr3b8vtzuwz2u.avif"
+      ]
+    },
+    {
+      "id": "monster-010",
+      "path": "assets/monsters/monster-010.avif",
+      "sha256": "46617905d61d3ef19a568c9cc20bedc418b4a5ab6bdca66b58d1fa595493a1c2",
+      "originalNames": [
+        "tg7wgvry53qa0532e1bz0jo495qj.avif"
+      ]
+    },
+    {
+      "id": "monster-011",
+      "path": "assets/monsters/monster-011.avif",
+      "sha256": "9d8a5039a7a3e15532127befff9e49c2d0cfc8142963f8ce0642d8299a386c2d",
+      "originalNames": [
+        "vsqfgvbsilxtn4xl4tv8l9mp7yx6.avif"
+      ]
+    },
+    {
+      "id": "monster-012",
+      "path": "assets/monsters/monster-012.png",
+      "sha256": "cd56b26d7df739e7064cde014deb42ddfb270560d743bc413c63b46ece6a98d2",
+      "originalNames": [
+        "012.png"
+      ]
+    },
+    {
+      "id": "monster-013",
+      "path": "assets/monsters/monster-013.png",
+      "sha256": "844446177a8154a179e1b59912485eb67c2c919af86e64d91bc47f90dccff6ea",
+      "originalNames": [
+        "013.png"
+      ]
+    },
+    {
+      "id": "monster-014",
+      "path": "assets/monsters/monster-014.png",
+      "sha256": "9c41f7c4e3b36ca07217764a1ed2693d16f880771d4be8f8a770ddbf9665d7d2",
+      "originalNames": [
+        "014.png"
+      ]
+    },
+    {
+      "id": "monster-015",
+      "path": "assets/monsters/monster-015.png",
+      "sha256": "9d1e000b5b19bd1f041b1161e74e46debb9ad5924f76e0f739f09570e5d0c2f6",
+      "originalNames": [
+        "015.png"
+      ]
+    },
+    {
+      "id": "monster-016",
+      "path": "assets/monsters/monster-016.png",
+      "sha256": "f3c75db441014c22d5dbba8a157f514f26da3e5528837969b3be5f494fd19213",
+      "originalNames": [
+        "016.png"
+      ]
+    },
+    {
+      "id": "monster-017",
+      "path": "assets/monsters/monster-017.png",
+      "sha256": "02f9c46efd554888a6782c2d2dac309bf5eaacba10ec9fef9fe4e6df339b1623",
+      "originalNames": [
+        "szx.png"
+      ]
+    },
+    {
+      "id": "monster-018",
+      "path": "assets/monsters/monster-018.png",
+      "sha256": "1a7e9e4cdee2211a10c0faf38ccad9c2cd667c75d8e8b2c641827ddb6a857db2",
+      "originalNames": [
+        "xd.png"
+      ]
+    }
+  ]
+}

@@ -5,11 +5,13 @@
 ```text
 MonsterGarden/
 ├── index.html                       # 網頁入口，宣告載入順序
+├── monster-inbox/                   # 原圖收件匣（圖片由 Git 忽略）
 ├── assets/
-│   ├── monsters/                    # 使用者提供的原始 PNG / AVIF
+│   ├── monsters/                    # 固定編號的正式 PNG / AVIF 副本
 │   └── styles/
 │       └── app.css                  # 滿版版面與場所選單
 ├── SPEC/                            # 技術規格與維護文件
+│   └── MONSTER_ASSETS.json          # ID、內容雜湊與原始檔名的匯入紀錄
 └── src/
     ├── main.js                      # 模組組裝、動畫生命週期與事件
     ├── config/

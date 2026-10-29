@@ -3,6 +3,7 @@
 
   const random = (min, max) => min + Math.random() * (max - min);
   const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+  const RESIDENT_LIMIT = 10;
 
   function inPond(x, y) {
     // Conservative shoreline bounds keep feet clear of the water.
@@ -13,6 +14,7 @@
     constructor() {
       this.sceneId = 'meadow';
       this.residents = [];
+      this.residentAssets = [];
       this.footprints = [];
       this.destination = null;
       this.time = 0;
@@ -24,9 +26,20 @@
     }
 
     setResidents(assets) {
+      this.residentAssets = [...assets];
+      this.rerollResidents();
+    }
+
+    rerollResidents() {
       this.releaseDrag(null, false);
+      // Shuffle a copy so every draw samples the complete loaded catalog.
+      const candidates = [...this.residentAssets];
+      for (let i = candidates.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [candidates[i], candidates[j]] = [candidates[j], candidates[i]];
+      }
       // No placeholder creatures: every resident requires a decoded image.
-      this.residents = assets.map((asset) => ({
+      this.residents = candidates.slice(0, RESIDENT_LIMIT).map((asset) => ({
         ...asset,
         size: random(82, 108),
       }));

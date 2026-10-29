@@ -36,9 +36,9 @@
     }
   }
 
-  function redistributeResidents() {
+  function rerollResidents() {
     dragControls.cancel();
-    world.redistributeResidents();
+    world.rerollResidents();
   }
 
   async function loadResidents() {
@@ -60,7 +60,7 @@
     }
   }
 
-  redistributeButton.addEventListener('click', redistributeResidents);
+  redistributeButton.addEventListener('click', rerollResidents);
   document.addEventListener('visibilitychange', onVisibilityChange);
   window.addEventListener('pagehide', (event) => {
     // The back-forward cache retains the existing application and listeners.
@@ -69,7 +69,7 @@
     renderer.destroy();
     unbindSelector();
     dragControls.destroy();
-    redistributeButton.removeEventListener('click', redistributeResidents);
+    redistributeButton.removeEventListener('click', rerollResidents);
     document.removeEventListener('visibilitychange', onVisibilityChange);
   });
 

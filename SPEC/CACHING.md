@@ -27,6 +27,6 @@ ETag 由主機提供。`src/assets/resource-loader.js` 使用 `fetch(url, { cach
 
 ETag 只驗證已知資源，不會探索新檔名。新增、移除或改名圖片時，仍須同步更新檔名清單；代理依 `AGENTS.md` 檢查並維護。
 
-右上角的重新整理按鈕維持「重新分布怪物位置」，不重新下載圖片；重新整理整個網頁才重新驗證清單和圖片。
+右上角的重新整理按鈕從已載入圖庫重新抽選最多 10 隻怪物並分布位置，不重新下載圖片；重新整理整個網頁才重新驗證清單和圖片。
 
 參考：[MDN Request.cache](https://developer.mozilla.org/en-US/docs/Web/API/Request/cache)、[MDN ETag](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/ETag)。

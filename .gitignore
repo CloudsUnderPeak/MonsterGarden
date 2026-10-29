@@ -3,3 +3,5 @@ Thumbs.db
 .agents/
 .codex/
 .aws/
+/monster-inbox/*
+!/monster-inbox/.gitkeep
